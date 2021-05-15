@@ -1,0 +1,100 @@
+.show {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 40px;
+  height: 90vh;
+  background-color: rgb(96, 129, 139);
+  place-content: center;
+}
+.show_img {
+  display: grid;
+  place-content: center;
+  border-radius: 15px;
+  background-color: rgb(138, 170, 179);
+  height: 390px;
+  width: 500px;
+  box-shadow: 1px 1px 1px -2px;
+}
+.show_info {
+  display: grid;
+  place-content: center;
+  grid-template-rows: auto auto;
+}
+.show_info_text {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  width: 400px;
+  margin-top: 0px;
+  color: rgba(255, 255, 255, 0.733);
+}
+.show_info_text > h5 {
+  font-size: 20px;
+  margin: 0px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  color: rgb(20, 19, 19);
+}
+.show_info_text > p {
+  font-size: 20px;
+  margin: 0px;
+  font-weight: 100;
+  margin-left: 10px;
+  color: rgb(238, 238, 238);
+  margin-bottom: 10px;
+}
+/*
+.show_info_map {
+  display: grid;
+  grid-template-rows: auto auto;
+  margin-top: 20px;
+  border: 1px solid rgb(71, 71, 71);
+  height: 400px;
+  width: 400px;
+}
+
+<div className="show_info_map">
+                     <h5>Locate on map </h5>
+                     <div className="map"></div>
+        </div>
+.show_info_map > h5 {
+  font-size: 20px;
+  margin: 0px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  color: rgb(20, 19, 19);
+}
+
+*/
+
+@media only screen and (max-width: 1041px) {
+  .show {
+    display: grid;
+    grid-template-columns: auto;
+  }
+  .show_img {
+    display: grid;
+  }
+  .show_info {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .show {
+    display: grid;
+    grid-template-columns: auto;
+    height: 100vh;
+  }
+  .show_img {
+    display: grid;
+    width: 400px;
+    height: 300px;
+  }
+  .show_info {
+    margin-top: 30px;
+  }
+  .show_info_text {
+    padding: 5px;
+  }
+}

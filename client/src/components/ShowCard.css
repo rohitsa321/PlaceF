@@ -1,0 +1,39 @@
+.card {
+  display: grid;
+  place-content: center;
+  border-radius: 15px;
+  background-color: rgb(138, 170, 179);
+  margin: 20px;
+  height: 350px;
+  width: 300px;
+  box-shadow: 1px 1px 1px -2px;
+}
+
+.card_img {
+  display: grid;
+  margin-top: 5px;
+  place-items: center;
+}
+
+.card_info {
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 20px;
+  font-weight: lighter;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+@media only screen and (max-width: 759px) {
+  .card {
+    width: 290px;
+    height: 280px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 280px;
+    height: 280px;
+  }
+}

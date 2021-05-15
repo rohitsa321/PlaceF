@@ -1,0 +1,43 @@
+.home_body1 {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    270deg,
+    rgb(37, 39, 39) 0%,
+    rgb(107, 192, 218) 160%
+  );
+  min-width: max-content;
+  height: 70vh;
+}
+
+.home_body2 {
+  display: grid;
+  padding: 20px;
+  background-color: rgb(96, 129, 139);
+  place-content: center;
+  grid-template-columns: auto auto auto;
+  column-gap: 20px;
+  will-change: contents;
+}
+
+@media only screen and (max-width: 1060px) {
+  .home_body1 {
+    height: 50vh;
+  }
+  .home_body2 {
+    display: grid;
+    padding: 30px;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .home_body1 {
+    height: 60vh;
+  }
+  .home_body2 {
+    display: grid;
+    padding: 50px;
+    grid-template-columns: auto;
+  }
+}

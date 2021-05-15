@@ -1,0 +1,17 @@
+.login {
+  display: grid;
+  grid-template-columns: auto;
+  place-items: center;
+  padding: 20px;
+}
+.login > h3 {
+  margin-bottom: 20px;
+}
+.MuiTextField-root {
+  width: 20vw !important;
+  margin-bottom: 20px !important;
+}
+
+.login > h5 {
+  cursor: pointer;
+}
