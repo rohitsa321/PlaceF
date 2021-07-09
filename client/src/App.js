@@ -12,20 +12,21 @@ import axios from 'axios';
 
 function App() {
   
-      const [{},dispatch]=useStateContext();
+      const [{places},dispatch]=useStateContext();
      
        useEffect(() => {
           //call get method to get all place details
         async function fetchdata(){
            const res=await axios.get("http://localhost:3001");
-           console.log(res);
            dispatch({
               type:"setplaces",
               places:res.data,
            })
            
        }
-        fetchdata();
+       if(places==null){
+          fetchdata();
+       }
        }, [])
 
   return (

@@ -12,23 +12,24 @@ function Login() {
 
      const [{},dispatch]=useStateContext();
 
-    const [data, setData] = useState({name:"",email:"",password:""})
+    const [data, setData] = useState({userame:"",email:"",password:""})
     const [signIn,setSignIn]=useState(false);
 
     //for checking value is filled or not it
-    const [name,setName]=useState(false);
+    const [username,setUsername]=useState(false);
     const [email,setEmail]=useState(false);
     const [password,setPassword]=useState(false);
+
     const theme=useStyle();
 
     
     const handleClick= async()=>{
         if(signIn){
             //for first time signin
-         if(!data.name||data.name.length<5)setName(true);
+         if(!data.username||data.username.length<5)setUsername(true);
          else if(!data.email||!validator.validate(data.email))setEmail(true);
          else if(!data.password)setPassword(true);
-         else if(data.name&&data.email&&data.password){
+         else if(data.username&&data.email&&data.password){
               console.log(data);
               //call post method to add user
              await axios.post("http://localhost:3001/signin",data)
@@ -40,11 +41,12 @@ function Login() {
                      });
                  }else{
                      alert(res.data);
+                     console.log(res.data);
                  }
               })
               .catch((err)=>alert(err));
 
-             setData({name:"",email:"",password:""});
+             setData({username:"",email:"",password:""});
          }
         }else{
             //for login purpose
@@ -60,13 +62,12 @@ function Login() {
                       type: "setuser",
                       user:res.data,
                      });
-                     console.log(res.data);
                  }else{
                      alert(res.data);
                  }
               })
               .catch((err)=>alert(err));
-              setData({name:"",email:"",password:""});
+              setData({username:"",email:"",password:""});
             }
         }
     }
@@ -74,8 +75,8 @@ function Login() {
     //for switching to login page
     const goOnLogin=()=>{
         setSignIn(false);
-        setData({name:"",email:"",password:""});
-        setName(false);
+        setData({username:"",email:"",password:""});
+        setUsername(false);
         setEmail(false);
         setPassword(false);
     }
@@ -83,8 +84,8 @@ function Login() {
     //for switching to sign page
     const goOnSignIn=()=>{
         setSignIn(true);
-        setData({name:"",email:"",password:""});
-        setName(false);
+        setData({username:"",email:"",password:""});
+        setUsername(false);
         setEmail(false);
         setPassword(false);
     }
@@ -94,11 +95,11 @@ function Login() {
         {signIn?<h3>Sign ln</h3>:<h3>Login</h3>}
         {signIn?
         <TextField
-          error={name}
-          value={data.name}
+          error={username}
+          value={data.username}
           label="Full Name"
           InputProps={{maxLength:20,minLength:5}}
-          onChange={(e)=>{setData({...data,name:e.target.value.trim()});if(name)setName(false); }}
+          onChange={(e)=>{setData({...data,username:e.target.value.trim()});if(username)setUsername(false); }}
           variant="standard"
         />:null
          }

@@ -9,6 +9,8 @@ const useStyle=makeStyles((theme)=>({
         },
      navbar_title:{
          flexGrow:1,
+         textDecoration:'none',
+         color:'white',
          fontFamily: [
              'Chilanka',
               'cursive',

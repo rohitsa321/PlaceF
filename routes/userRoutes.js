@@ -6,14 +6,15 @@ userRouter.get('/',(req,res)=>{
     user.find()
     .then(users=>res.json(users))
     .catch(err=>res.status(400).json("Error: "+err));
-});*/
+});
+*/
 
 userRouter.get('/alluser',(req,res)=>{
      user.find().then((doc)=>res.send(doc)).catch((err)=>res.send("Error: "+err))
 });
 
 
-
+//existing account log in
 userRouter.post('/login',(req,res)=>{
      const email=req.body.email;
      const password=req.body.password;
@@ -35,7 +36,7 @@ userRouter.post('/login',(req,res)=>{
          res.status(400).send("Error: "+err));
 });
 
-
+//Creating account
 userRouter.post('/signin',(req,res)=>{
     const username=req.body.username;
     const password=req.body.password;
@@ -45,7 +46,7 @@ userRouter.post('/signin',(req,res)=>{
         if(doc){
                  res.status(200).send("You already have an account");
         }else{
-               const newuser=new user({username,password,email});
+                 const newuser=new user({username,password,email});
                  newuser.save()
                 .then((doc)=>res.status(201).send(doc))
                 .catch((err)=>{
@@ -54,7 +55,7 @@ userRouter.post('/signin',(req,res)=>{
         }
     })
     .catch((err)=>{
-         res.status(400).send("error")
+         res.status(400).send("error"+err)
     });
     
 });

@@ -63,8 +63,6 @@ placeRouter.post('/:userId/add', upload.single("file") ,(req,res)=>{
     if(!req.file){
         res.send("please upload file");
      }
-      console.log(req.file);
-      console.log(req.body);
      
       const userId=req.params.userId;
       const location=req.body.location;
@@ -82,7 +80,8 @@ placeRouter.post('/:userId/add', upload.single("file") ,(req,res)=>{
                      date:date
                     });
                 doc.save()
-                .then(()=>res.send("added place"))
+                .then((d)=>{
+                    res.send(d.place[d.place.length-1]);})
                 .catch((err)=>res.send(err));
                }
             else{
@@ -96,7 +95,7 @@ placeRouter.post('/:userId/add', upload.single("file") ,(req,res)=>{
                         date:date
                     }});
                 newUserplace.save()
-                .then(()=>res.send("added new userplace"))
+                .then((d)=>res.send(d.place[d.place.length-1]))
                 .catch((err)=>res.send(err));
               }
         }).catch((err)=>res.send("Error: "+err));
@@ -104,16 +103,17 @@ placeRouter.post('/:userId/add', upload.single("file") ,(req,res)=>{
 
 //for deleting place for user specific
 placeRouter.delete('/:userId/del',(req,res)=>{
+    console.log(req.body);
        const userId=req.params.userId;
        const image_path=req.body.image_path;
-       let place_id;
+       const place_id=req.body._id;
        userPlace.findOne({userId:userId})
        .then((doc)=>{
-             doc.place.forEach((p)=>{
+           /*  doc.place.forEach((p)=>{
                  if(p.image_path===image_path){
                        place_id=p._id;
                    }
-               });
+               });*/
             doc.place.pull({_id:place_id});
             doc.save()
             .then(()=>{

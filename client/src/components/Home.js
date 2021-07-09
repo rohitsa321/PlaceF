@@ -8,8 +8,11 @@ import { useStateContext } from './StateProvider';
 export default function Home() {
        const styles=useStyle();
 
-       const [{places}]=useStateContext();
-
+       const [{places},dipatch]=useStateContext();
+      
+        useEffect(()=>{
+            console.log(places);
+        },[places]);
      
     return (
         <div className="home">
@@ -20,7 +23,7 @@ export default function Home() {
              <div className="home_body2">
                 {places?
                 places.map(data=>
-                   <ShowCard key={data._id} _id={data._id} about={data.about} location={data.location} image_path={data.image_path} />
+                   <ShowCard key={data._id} _id={data._id} about={data.about} location={data.location} image_path={data.image_path} del={false} />
                     ) 
                  :null}
              </div>

@@ -14,16 +14,15 @@ export default function Profile() {
           //call get method to get all user specific places
         async function fetchdata(){
            const res=await axios.get(`http://localhost:3001/${user._id}`);
-           console.log(res);
            dispatch({
               type:"setuserplaces",
               userplaces:res.data,
            }); 
           }
-          if(user){
-         fetchdata();
-        }
-       },[]);
+          if(userplaces==null){
+            fetchdata();
+          }
+       },[userplaces]);
 
     return (
       <div>
@@ -41,7 +40,7 @@ export default function Profile() {
               <ShowCard add={true}/>
               {userplaces?
                 userplaces.map(data=>
-                   <ShowCard key={data._id} _id={data._id} about={data.about} location={data.location} image_path={data.image_path} />
+                   <ShowCard key={data._id} _id={data._id} about={data.about} location={data.location} image_path={data.image_path} del={true} />
                     ) 
                  :null}
             </div>

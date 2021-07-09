@@ -1,25 +1,19 @@
-import {  TextField, Typography } from '@material-ui/core'
+
 import React,{useState,useEffect} from 'react'
 import "./ShowAllInfo.css"
 import useStyle from './theme/style';
-import resizeImage from './imageresize';
 import { useLocation } from 'react-router';
+import { Button } from '@material-ui/core';
+
 
 export default function ShowAllInfo(props) {
      
     const path=useLocation();
-
     const theme=useStyle();
     const [image,setImage]=useState();
     useEffect(() => {
-       async function resize(url){
-            let blob= await fetch(url).then(img => img.blob())
-            const img=await resizeImage(blob,400,400);
-            setImage(img);
-        }
         if(path.info){
-           resize(`http://localhost:3001/uploads/${path.info.image_path}`);
-           console.log(path.info);
+           setImage(`http://localhost:3001/uploads/${path.info.image_path}`);
         }
     }, [])
 
@@ -40,8 +34,7 @@ export default function ShowAllInfo(props) {
                   <h5>About</h5>
                   <p>{path.info.about}</p>
               </div>
-              
-          </div>
+            </div>
         </div>
     )
 }

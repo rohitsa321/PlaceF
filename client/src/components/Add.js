@@ -3,24 +3,23 @@ import React,{useState,useEffect} from 'react'
 import './Add.css'
 import { useStateContext } from './StateProvider';
 import useStyle from './theme/style';
-import resizeImage from './imageresize';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const headers={ 'Content-Type': 'multipart/form-data',}
 
 export default function Add() {
     const theme=useStyle();
-    const [{user},dispatch]=useStateContext();
+    const [{user,userplaces,places},dispatch]=useStateContext();
     const [data,setData]=useState({location:"",about:"",image:""});
     const [image,setImage]=useState();
     useEffect(() => {
-        console.log(data);
     }, [data])
 
     const handleChange = async(e) =>{
          setData({...data,image:e.target.files[0]});
-        const img=await resizeImage(e.target.files[0],250,330);
-        setImage(img);
+        setImage(URL.createObjectURL(e.target.files[0]));
+        
     };
 
     const handleClick = async() =>{
@@ -30,7 +29,23 @@ export default function Add() {
          formdata.append("file",data.image);
           await axios.post(`http://localhost:3001/${user._id}/add`,formdata)
                 .then((res)=>{
-                      alert(res.data);
+
+                  //adding into  global places
+                  var updatedPlaces=places;
+                  updatedPlaces.push(res.data);
+                  dispatch({
+                    type:"setplaces",
+                    places:updatedPlaces
+                  });
+
+                  //adding into user specific places
+                  var updatedUserplaces=userplaces;
+                  updatedUserplaces.push(res.data);
+                  dispatch({
+                    type:"setuserplaces",
+                    userplaces:updatedUserplaces
+                  });
+                  alert("added");
                 })
                 .catch((err)=>{
                      alert("ErrorF: "+err);
@@ -61,7 +76,7 @@ export default function Add() {
                      onChange={(e)=>setData({...data,about:e.target.value.trim()})}
                 />
               </div>
-               <Button onClick={handleClick}  size="large" variant="contained" color="primary" >add</Button>
+               <Button component={Link} to="/profile" onClick={handleClick}  size="large" variant="contained" color="primary" >add</Button>
              </div>   
            </div> 
             ):(

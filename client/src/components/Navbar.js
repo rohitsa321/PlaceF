@@ -9,7 +9,7 @@ import Modal from 'react-awesome-modal';
 import Login from './Login';
 import { useStateContext } from './StateProvider';
 import { Link } from 'react-router-dom';
-
+import {RiLogoutCircleLine} from 'react-icons/ri'
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -27,6 +27,8 @@ function ElevationScroll(props) {
   });
 }
 
+
+
 function Navbar() {
     const styles=useStyle();
     const [{user},dispatch]=useStateContext();
@@ -34,20 +36,23 @@ function Navbar() {
 
     useEffect(() => {
       if(user){
-          console.log(user);
           setPopUplogin(false);
         }
     }, [user])
+   
+    const logOut=()=>{
+       dispatch({
+         type:"log_out"
+       })
+    }
+   
 
     return (
         <div className="nav">
             <ElevationScroll>
             <AppBar className={styles.navbar}>
              <Toolbar>   
-                  <Typography  variant="h6" className={styles.navbar_title}>PlaceF</Typography>
-                    <Button component={Link} className={styles.navbar_button} to="/" color="inherit">
-                    Home
-                   </Button>
+                  <Typography component={Link} to="/" variant="h6" className={styles.navbar_title}>PlaceF</Typography>
                    {
                     user?
                     null
@@ -59,7 +64,13 @@ function Navbar() {
                     {user.username}
                  </Button>
                    :null
-                   } 
+                 }
+                 {user?
+                 <Button component={Link} className={styles.navbar_button} onClick={logOut} to="/" color="inherit">
+                    <RiLogoutCircleLine size="25"/>
+                 </Button>
+                   :null
+                  }
                   
             </Toolbar>
             </AppBar>
