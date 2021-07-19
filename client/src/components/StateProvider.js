@@ -3,7 +3,6 @@ import React,{ createContext, useContext, useReducer } from "react";
 export const StateContext=createContext();
 export const reducer=(state,action)=>{
      switch (action.type) {
-
          case "setplaces":
              return{
                  ...state,

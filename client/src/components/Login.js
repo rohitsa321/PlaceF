@@ -73,7 +73,7 @@ function Login() {
     }
     
     //for switching to login page
-    const goOnLogin=()=>{
+    const goOnSignUp=()=>{
         setSignIn(false);
         setData({username:"",email:"",password:""});
         setUsername(false);
@@ -92,7 +92,7 @@ function Login() {
     
     return (
         <div className="login">
-        {signIn?<h3>Sign ln</h3>:<h3>Login</h3>}
+        {signIn?<h3>Sign up</h3>:<h3>Sign in</h3>}
         {signIn?
         <TextField
           error={username}
@@ -124,14 +124,14 @@ function Login() {
            variant="standard"
         />
         {signIn?
-          <Button onClick={handleClick} size="large"  variant="contained" color="primary" >Sign In</Button>
+          <Button onClick={handleClick} size="large"  variant="contained" color="primary" >Sign up</Button>
           :
-           <Button onClick={handleClick} size="large" variant="contained" color="primary" >Login</Button>
+           <Button onClick={handleClick} size="large" variant="contained" color="primary" >Sign In</Button>
          }
          {signIn?
-         <h5>Already have an account!<span onClick={goOnLogin} >Click here</span></h5>
+         <h5>Already have an account!{' '}<span onClick={goOnSignUp} >Click here</span></h5>
           :
-          <h5>Don't have an account!<span onClick={goOnSignIn} >Click here</span></h5>
+          <h5>Don't have an account!{' '}<span onClick={goOnSignIn} >Click here</span></h5>
          }
          
         </div>

@@ -64,6 +64,10 @@ const useStyle=makeStyles((theme)=>({
        color:'white',
        display:"grid",
         placeContent:"center"
+     },
+     button_center:{
+         display:"grid",
+        placeContent:"center",
      }
 }));
 

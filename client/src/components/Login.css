@@ -12,6 +12,8 @@
   margin-bottom: 20px !important;
 }
 
-.login > h5 {
+.login > h5 > span{
   cursor: pointer;
+  color: rgb(51, 195, 214);
 }
+

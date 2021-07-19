@@ -9,7 +9,6 @@ import Modal from 'react-awesome-modal';
 import Login from './Login';
 import { useStateContext } from './StateProvider';
 import { Link } from 'react-router-dom';
-import {RiLogoutCircleLine} from 'react-icons/ri'
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -32,11 +31,11 @@ function ElevationScroll(props) {
 function Navbar() {
     const styles=useStyle();
     const [{user},dispatch]=useStateContext();
-    const[popUplogin,setPopUplogin]=useState(false);
+    const[popUpSignIn,setPopUpSignIn]=useState(false);
 
     useEffect(() => {
       if(user){
-          setPopUplogin(false);
+          setPopUpSignIn(false);
         }
     }, [user])
    
@@ -57,7 +56,7 @@ function Navbar() {
                     user?
                     null
                     :
-                    <Button color="inherit" className={styles.navbar_button} onClick={()=>setPopUplogin(!popUplogin)} >Login</Button>
+                    <Button color="inherit" className={styles.navbar_button} onClick={()=>setPopUpSignIn(!popUpSignIn)} >Sign in</Button>
                    }
                  {user?
                  <Button component={Link} className={styles.navbar_button} to="/profile" color="inherit">
@@ -67,7 +66,7 @@ function Navbar() {
                  }
                  {user?
                  <Button component={Link} className={styles.navbar_button} onClick={logOut} to="/" color="inherit">
-                    <RiLogoutCircleLine size="25"/>
+                    log out
                  </Button>
                    :null
                   }
@@ -79,8 +78,8 @@ function Navbar() {
 
 
             <Modal
-             visible={popUplogin}
-             effect="fadeInUp" onClickAway={() =>setPopUplogin(false) }
+             visible={popUpSignIn}
+             effect="fadeInUp" onClickAway={() =>setPopUpSignIn(false) }
             >
               <Login />
             </Modal>

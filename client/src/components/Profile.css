@@ -20,6 +20,7 @@
   display: grid;
   padding: 20px;
   place-content: center;
+  min-height: 50vh;
   grid-template-columns: auto auto auto;
   column-gap: 20px;
 }

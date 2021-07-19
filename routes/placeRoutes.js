@@ -57,7 +57,7 @@ placeRouter.get('/:userId',(req,res)=>{
 });
 
 //for posting new place
-placeRouter.post('/:userId/add', upload.single("file") ,(req,res)=>{
+placeRouter.post('/:userId', upload.single("file") ,(req,res)=>{
       
     //if file is not uploded in ./uploads
     if(!req.file){
@@ -102,8 +102,7 @@ placeRouter.post('/:userId/add', upload.single("file") ,(req,res)=>{
 });
 
 //for deleting place for user specific
-placeRouter.delete('/:userId/del',(req,res)=>{
-    console.log(req.body);
+placeRouter.delete('/:userId',(req,res)=>{
        const userId=req.params.userId;
        const image_path=req.body.image_path;
        const place_id=req.body._id;
@@ -120,9 +119,62 @@ placeRouter.delete('/:userId/del',(req,res)=>{
                 fs.unlink(`./uploads/${image_path}`,resultHandler);
                 res.send("file deleted");
             })
-            .catch((er)=>res.send("Error: "+er));
-       }).catch((er)=>res.send("Error: "+er));
+            .catch((err)=>res.send("Error: "+err));
+       }).catch((err)=>res.send("Error: "+err));
 })
+
+//for updating place content not image
+placeRouter.put('/:userId',(req,res)=>{
+    const date=moment().format('h:mma DD-MM-YY');
+    const about=req.body.about;
+    const location=req.body.location;
+    
+    const query={userId:`${req.params.userId}`,"place._id":`${req.body._id}`};
+    const updateDocument = {
+        $set: { 
+            "place.$.about": `${req.body.about}`,
+            "place.$.location": `${req.body.location}`,
+            "place.$.date": `${date}`,
+             },
+      };
+    
+    userPlace.updateOne(query, updateDocument)
+    .then((result)=>{
+         res.send("updated!");
+    }).catch((err)=>res.send(err));
+
+});
+
+
+
+//for updating place with image as well
+placeRouter.put('/:userId/file', upload.single("file"),(req,res)=>{
+        
+        const date=moment().format('h:mma DD-MM-YY');
+        
+        const prev_image_path=req.body.prev_image_path;
+        const image_path=req.file.path.substr(8);
+        const query={userId:`${req.params.userId}`,"place._id":`${req.body._id}`};
+        const updateDocument = {
+            $set: { 
+                "place.$.image_path": `${image_path}`,
+                "place.$.about": `${req.body.about}`,
+                "place.$.location": `${req.body.location}`,
+                "place.$.date": `${date}`,
+                 },
+        };
+
+
+        userPlace.updateOne(query, updateDocument)
+        .then((result)=>{
+            if(prev_image_path){
+                fs.unlink(`./uploads/${prev_image_path}`,resultHandler);
+                res.send(image_path);
+             }
+        })
+        .catch((err)=>res.send(err));
+      
+});
 
 
 

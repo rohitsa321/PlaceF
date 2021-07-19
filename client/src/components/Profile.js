@@ -1,10 +1,11 @@
-import { Avatar, Typography } from '@material-ui/core'
+import { Avatar, Button, Typography } from '@material-ui/core'
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import './Profile.css'
 import ShowCard from './ShowCard';
 import { useStateContext } from './StateProvider';
 import useStyle from './theme/style'
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
     const theme=useStyle();
@@ -34,13 +35,17 @@ export default function Profile() {
                  <Typography variant="h6" className={theme.profile_text}>({user.email})</Typography>
             </div>
             <div style={{paddingTop:"20px"}}>
-             <Typography variant="h5" className={theme.profile_text} >added by you</Typography>
+             <Typography variant="h5" className={theme.profile_text} >
+                <Button component={Link} to="profile/add" className={theme.button_center} size="large" variant="contained" color="primary" >
+                Add</Button>
+                {userplaces!==null?'added by you':null}
+                </Typography>
             </div>
+            
             <div className="profile_data">
-              <ShowCard add={true}/>
               {userplaces?
                 userplaces.map(data=>
-                   <ShowCard key={data._id} _id={data._id} about={data.about} location={data.location} image_path={data.image_path} del={true} />
+                   <ShowCard key={data._id} data={data} del={true} />
                     ) 
                  :null}
             </div>

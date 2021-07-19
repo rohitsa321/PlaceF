@@ -17,12 +17,13 @@ function App() {
        useEffect(() => {
           //call get method to get all place details
         async function fetchdata(){
-           const res=await axios.get("http://localhost:3001");
-           dispatch({
+           await axios.get("http://localhost:3001")
+           .then((res)=>{
+            dispatch({
               type:"setplaces",
               places:res.data,
            })
-           
+           }).catch((err)=>alert("reload page"));
        }
        if(places==null){
           fetchdata();
@@ -46,7 +47,7 @@ function App() {
               <Add/>
             </Route>
 
-            <Route exact path="/Info">
+            <Route exact path="/info">
               <ShowAllInfo/>
             </Route>
          </Switch>

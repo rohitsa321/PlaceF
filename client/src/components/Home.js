@@ -11,19 +11,17 @@ export default function Home() {
        const [{places},dipatch]=useStateContext();
       
         useEffect(()=>{
-            console.log(places);
         },[places]);
      
     return (
         <div className="home">
              <div className="home_body1">
-                   <Typography variant="h4" className={styles.home_text}>Looking for a Camping place!</Typography>
-                   
+                   <Typography variant="h4" className={styles.home_text}>Looking for a Camping place!</Typography>         
              </div>
              <div className="home_body2">
-                {places?
+                {places!=null?
                 places.map(data=>
-                   <ShowCard key={data._id} _id={data._id} about={data.about} location={data.location} image_path={data.image_path} del={false} />
+                   <ShowCard key={data._id} data={data} del={false} />
                     ) 
                  :null}
              </div>
