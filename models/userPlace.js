@@ -11,7 +11,13 @@ const userPlaceSchema=new Schema({
          location:{
          type:String,
       },
-     about:{
+      lat:{
+          type:Number,
+      },
+      lng:{
+          type:Number,
+      },
+      about:{
          type:String,
      },
      image_path:{

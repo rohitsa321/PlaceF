@@ -1,9 +1,8 @@
 import {  Button, TextField } from '@material-ui/core'
 import axios from 'axios';
-import React,{useState,useEffect, useContext} from 'react'
+import React,{useState,} from 'react'
 import './Login.css'
 import { useStateContext } from './StateProvider';
-import useStyle from './theme/style';
 import validator from 'email-validator';
 
 
@@ -19,9 +18,6 @@ function Login() {
     const [username,setUsername]=useState(false);
     const [email,setEmail]=useState(false);
     const [password,setPassword]=useState(false);
-
-    const theme=useStyle();
-
     
     const handleClick= async()=>{
         if(signIn){

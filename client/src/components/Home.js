@@ -1,5 +1,5 @@
 import {  Typography } from '@material-ui/core'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect} from 'react'
 import ShowCard from './ShowCard';
 import './Home.css'
 import useStyle from './theme/style';
@@ -21,7 +21,7 @@ export default function Home() {
              <div className="home_body2">
                 {places!=null?
                 places.map(data=>
-                   <ShowCard key={data._id} data={data} del={false} />
+                   <ShowCard key={data._id} data={data} updation={false} />
                     ) 
                  :null}
              </div>

@@ -67,6 +67,8 @@ placeRouter.post('/:userId', upload.single("file") ,(req,res)=>{
       const userId=req.params.userId;
       const location=req.body.location;
       const about=req.body.about;
+      const lat=req.body.lat;
+      const lng=req.body.lng;
       const date=moment().format('h:mma DD-MM-YY');
       
        const image_path=req.file.path.substr(8);
@@ -75,6 +77,8 @@ placeRouter.post('/:userId', upload.single("file") ,(req,res)=>{
             if(doc){
                  doc.place.push({
                      location:location,
+                     lat:lat,
+                     lng:lng,
                      about:about,
                      image_path:image_path,
                      date:date
@@ -90,6 +94,8 @@ placeRouter.post('/:userId', upload.single("file") ,(req,res)=>{
                     userId:userId,
                     place:{
                         location:location,
+                        lat:lat,
+                        lng:lng,
                         about:about,
                         image_path:image_path,
                         date:date
@@ -126,12 +132,11 @@ placeRouter.delete('/:userId',(req,res)=>{
 //for updating place content not image
 placeRouter.put('/:userId',(req,res)=>{
     const date=moment().format('h:mma DD-MM-YY');
-    const about=req.body.about;
-    const location=req.body.location;
-    
     const query={userId:`${req.params.userId}`,"place._id":`${req.body._id}`};
     const updateDocument = {
         $set: { 
+            "place.$.lat":`${req.body.la}`,
+            "place.$.lng":`${req.body.lng}`,
             "place.$.about": `${req.body.about}`,
             "place.$.location": `${req.body.location}`,
             "place.$.date": `${date}`,
@@ -158,6 +163,8 @@ placeRouter.put('/:userId/file', upload.single("file"),(req,res)=>{
         const updateDocument = {
             $set: { 
                 "place.$.image_path": `${image_path}`,
+                "place.$.lat":`${req.body.lat}`,
+                "place.$.lng":`${req.body.lng}`,
                 "place.$.about": `${req.body.about}`,
                 "place.$.location": `${req.body.location}`,
                 "place.$.date": `${date}`,

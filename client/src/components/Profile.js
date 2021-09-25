@@ -23,7 +23,7 @@ export default function Profile() {
           if(userplaces==null){
             fetchdata();
           }
-       },[userplaces]);
+       },[userplaces,user]);
 
     return (
       <div>
@@ -45,7 +45,7 @@ export default function Profile() {
             <div className="profile_data">
               {userplaces?
                 userplaces.map(data=>
-                   <ShowCard key={data._id} data={data} del={true} />
+                   <ShowCard key={data._id} data={data} updation={true} />
                     ) 
                  :null}
             </div>

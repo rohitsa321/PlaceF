@@ -2,59 +2,90 @@
   display: grid;
   margin: 0;
 }
-.add {
+.add_body {
   display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 40px;
-  min-height: 90vh;
+  grid-template-rows: auto auto;
   max-height: max-content;
   background-color: rgb(96, 129, 139);
   place-content: center;
 }
-.add_img {
+.addr1{
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 40px;
+  min-height: 80vh;
+  max-height: max-content;
+  background-color: rgb(96, 129, 139);
+  place-content: center;
+}
+.addr2{
+  display: grid;
+  grid-template-rows: auto auto auto;
+  min-height: 70vh;
+  max-height: max-content;
+  grid-template-columns: auto;
+  place-content: center;
+  margin-bottom: 40px;
+}
+.addr2_map{
+  display: grid;
+  margin-top: 5px;
+  height: 60vh;
+  width: 40vw;
+  margin-bottom: 20px;
+  border: 1px solid rgb(71, 71, 71);
+  place-content: center;
+}
+.addr1_img {
   display: grid;
   grid-template-columns: auto;
   place-content: center;
   border-radius: 15px;
-  background-color: rgb(138, 170, 179);
   height: 390px;
   width: 500px;
   box-shadow: 1px 1px 1px -2px;
 }
 
-.add_img_block {
+.addr1_img_block {
   display: grid;
   place-content: center;
   height: 350px;
   width: 300px;
 }
-.add_img_block>img{
+.addr1_img_block>img{
   width: 100%;
   height: 100%;
 }
 
-.add_img > input {
+.addr1_img > input {
   margin-top: 10px;
 }
 
-.add_info {
+.addr1_info {
   place-content: center;
   display: grid;
   grid-template-rows: auto;
   width: 100%;
 }
-.add_info_text {
+.addr1_info_text {
   display: grid;
   color: white;
 }
-.add_info_text > h5 {
+.addr2  > h5 {
   font-size: 20px;
   margin: 0px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 400;
   color: rgb(20, 19, 19);
 }
-.add_info_text > textarea {
+.addr1_info_text > h5 {
+  font-size: 20px;
+  margin: 0px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  color: rgb(20, 19, 19);
+}
+.addr1_info_text > textarea {
   font-size: 18px;
   background-color: transparent;
   border: 1px solid rgb(71, 71, 71);
@@ -75,18 +106,18 @@
 }*/
 
 @media only screen and (max-width: 970px) {
-  .add {
+  .add_body {
     display: grid;
     grid-template-columns: auto;
   }
 }
 
 @media only screen and (max-width: 639px) {
-  .add {
+  .add_body {
     display: grid;
     grid-template-columns: auto;
   }
-  .add_img {
+  .addr1_img {
     display: grid;
     width: 400px;
     height: 300px;

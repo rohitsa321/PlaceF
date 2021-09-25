@@ -1,19 +1,22 @@
 import React,{useState, useEffect} from 'react'
 import './ShowCard.css'
-import {GrAdd} from 'react-icons/gr'
-import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {AiFillDelete} from 'react-icons/ai'
 import axios from 'axios';
 import { useStateContext } from './StateProvider';
+import imageResize from './imageresize';
 
-export default  function ShowCard({data,del}) {
+export default  function ShowCard({data,updation}) {
     const [image,setImage]=useState(null);
     const [{user,userplaces,places},dispatch]=useStateContext();
     useEffect(()=>{
+      async function fetchImage(){
       if(data._id){
-        setImage(`http://localhost:3001/uploads/${data.image_path}`);
-      }
+        const file= await fetch(`http://localhost:3001/uploads/${data.image_path}`).then(r => r.blob());
+        const resizedImage=await imageResize(file,280,260);
+        setImage(resizedImage);
+      }}
+      fetchImage();
     },[data._id,data.image_path]);
 
     const deletePlace= async()=>{
@@ -42,15 +45,15 @@ export default  function ShowCard({data,del}) {
 
     return (
        
-        <div className="card"> 
-         <div>
-            {del?
+        <div> 
+                {updation?
                  (<button onClick={deletePlace}><AiFillDelete size="25"/> </button>)
                  :null
                  }
+         <div  className="card">
              <Link  to={{
                       pathname:'/info',
-                      info:{data,del}
+                      info:{data,updation}
                     }}
                   style={{textDecoration:"none"}}
                   >
@@ -59,7 +62,7 @@ export default  function ShowCard({data,del}) {
                               <img src={image} alt="img" />
                           </div>
                           <div className="card_info">
-                            <h5>{data.location.substring(0,25)}</h5>
+                            <h5>{data.location.length<25?data.location:data.location.substring(0,25)}</h5>
                           </div> 
                   </div>
             </Link> 
