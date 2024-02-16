@@ -1,0 +1,8 @@
+** required packages **
+express
+cors
+dotenv
+mongoose
+multer
+moment
+nanoid@3.3.4

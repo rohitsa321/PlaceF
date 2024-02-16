@@ -9,6 +9,7 @@ export default function Home() {
        const styles=useStyle();
 
        const [{places},dipatch]=useStateContext();
+       console.log(places);
       
         useEffect(()=>{
         },[places]);

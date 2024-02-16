@@ -23,7 +23,7 @@ function App() {
               type:"setplaces",
               places:res.data,
            })
-           }).catch((err)=>alert("reload page"));
+           }).catch((err)=>console.log("Getting error when fetching places: ", err));
        }
        if(places==null){
           fetchdata();
