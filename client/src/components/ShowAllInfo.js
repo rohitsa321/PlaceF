@@ -17,26 +17,35 @@ export default function ShowAllInfo(props) {
      
     const path=useLocation();
     const [image,setImage]=useState();
-    const [data,setData]=useState({image_path:"",about:"",location:"",lat:"",lng:"",_id:"",date:""});
+    const [data,setData]=useState({img:"",image_path:"",about:"",location:"",lat:"",lng:"",_id:"",date:""});
     
     useEffect(() => {
         async function fetchImage(){
                 if(path.info.data){
-                const file= await fetch(`http://localhost:3001/uploads/${path.info.data.image_path}`).then(r => r.blob());
-                const resizedImage=await imageResize(file,500,390);
-                setImage(resizedImage);
-                setData(
-                            {
-                            image_path:path.info.data.image_path,
-                            location:path.info.data.location,
-                            lat:path.info.data.lat,
-                            lng:path.info.data.lng,
-                            about:path.info.data.about,
-                            _id:path.info.data._id,
-                            date:path.info.data.date
-                            }
-                        )
-                }
+                    // decoding binary image data
+                    var buffer = new Buffer.from(path.info.data.img, 'base64')
+                    var byteString = atob(buffer)
+                    // write the bytes of the string to an ArrayBuffer
+                    var array_buffer = new ArrayBuffer(byteString.length);
+                    var ia = new Uint8Array(array_buffer);
+                    for (var i = 0; i < byteString.length; i++) {
+                        ia[i] = byteString.charCodeAt(i);
+                    }
+                    // write the ArrayBuffer to a blob
+                    var blob = new Blob([array_buffer]);
+                    const resizedImage=await imageResize(blob,500,390);
+                    setImage(resizedImage);
+                    setData({
+                      img: path.info.data.img,
+                      image_path: path.info.data.image_path,
+                      location: path.info.data.location,
+                      lat: path.info.data.lat,
+                      lng: path.info.data.lng,
+                      about: path.info.data.about,
+                      _id: path.info.data._id,
+                      date: path.info.data.date,
+                    });
+                    }
         }
         fetchImage();
     }, [])

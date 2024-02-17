@@ -1,38 +1,35 @@
-const mongoose=require('mongoose');
+const mongoose = require("mongoose");
 //var uniqueValidator = require('mongoose-unique-validator');
-const Schema=mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const userPlaceSchema=new Schema({
-     userId:{
-         type:String,
-     },
-     place:[
-        {
-         location:{
-         type:String,
+const userPlaceSchema = new Schema({
+  userId: {
+    type: String,
+  },
+  place: [
+    {
+      location: {
+        type: String,
       },
-      lat:{
-          type:Number,
+      lat: {
+        type: Number,
       },
-      lng:{
-          type:Number,
+      lng: {
+        type: Number,
       },
-      about:{
-         type:String,
-     },
-     image_path:{
-         type:String,
-         unique:true
-     },
-     date:{
-         type:String,
-     }
-     }]
- });
+      about: {
+        type: String,
+      },
+      image_path: {
+        type: String,
+      },
+      img: Buffer,
+      date: {
+        type: String,
+      },
+    },
+  ],
+});
 
-
-const userPlace=mongoose.model('userPlaces',userPlaceSchema);
-module.exports=userPlace;
-
-
-
+const userPlace = mongoose.model("userPlaces", userPlaceSchema);
+module.exports = userPlace;
