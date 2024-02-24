@@ -132,10 +132,7 @@ placeRouter.delete("/:userId", (req, res) => {
       doc.place.pull({ _id: req.body._id });
       doc
         .save()
-        .then(() => {
-          fs.unlink(`./uploads/${req.body.image_path}`, resultHandler);
-          res.send("file deleted");
-        })
+        .then(() => res.send("file deleted"))
         .catch((err) => {
           console.log("Error: " + err);
           res.status(400).send("Error: " + err);
