@@ -1,17 +1,15 @@
 # placeF
 
 ### Objective
-To provide the best camping locations which are surrounded by nature. And also, To provide information 
+To provide the best camping locations that are surrounded by nature. And also, To provide information 
 about that location.
 
 
 ### Overview
-PlaceF is a web project where users can find the best camping locations which are surrounded by nature. Users can easily find camping locations 
-with accurate information and can also see pictures of it. If any user know any exceptional location for camping then, they can create their account and can post 
-it with location and can also upload pictures of it. And By mistake any user can post worng information, he/she can update or delete.
+PlaceF is a user-friendly web application designed to help outdoor enthusiasts discover and explore camping locations with ease. The platform provides a comprehensive database of camping spots, complete with location details, pictures, and essential information for each site. Users can browse through a curated collection of camping destinations and view stunning location pictures.
 
 ### Tech stack
-Reactjs, HTML, CSS, Express, MongoDB
+React.js, Express.js, MongoDB, HTML5, CSS3, Google Map API
 
 ### Some Screenshots
 
